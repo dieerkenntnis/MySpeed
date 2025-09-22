@@ -22,6 +22,8 @@ module.exports.parseData = (provider, data) => {
             return this.parseOokla(data);
         case "libre":
             return this.parseLibre(data);
+        case "librecustom":
+            return this.parseLibre(data);
         case "cloudflare":
             return this.parseCloudflare(data);
         default:

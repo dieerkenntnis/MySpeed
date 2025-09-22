@@ -20,6 +20,7 @@ const configDefaults = {
     provider: "none",
     ooklaId: "none",
     libreId: "none",
+    librecustomId: "none",
     password: "none",
     passwordLevel: "none",
     interface: "none"
@@ -86,13 +87,13 @@ module.exports.validateInput = async (key, value) => {
     if ((key === "ping" || key === "download" || key === "upload") && /[^0-9.]/.test(value))
         return "You need to provide a number in order to change this";
 
-    if ((key === "ooklaId" || key === "libreId") && (/[^0-9]/.test(value) && value !== "none"))
+    if ((key === "ooklaId" || key === "libreId" || key === "librecustomId") && (/[^0-9]/.test(value) && value !== "none"))
         return "You need to provide a number in order to change this";
 
     if (key === "passwordLevel" && !["none", "read"].includes(value))
         return "You need to provide either none or read-access";
 
-    if (key === "provider" && !["ookla", "libre", "cloudflare"].includes(value))
+    if (key === "provider" && !["ookla", "libre", "librecustom", "cloudflare"].includes(value))
         return "You need to provide a valid provider";
 
     if (key === "ping")

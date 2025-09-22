@@ -24,6 +24,9 @@ module.exports = async (mode, serverId) => {
         }
 
         if (serverId) args.push(`--server-id=${serverId}`);
+    } else if (mode === "librecustom") {
+        args = ['--json', '--local-json', './data/servers/librespeed_custom.json', '--duration=5', '--source=' + interfaceIp];
+        if (serverId) args.push(`--server=${serverId}`);
     } else {
         args = ['--json', '--duration=5', '--source=' + interfaceIp];
         if (serverId) args.push(`--server=${serverId}`);
@@ -54,7 +57,7 @@ module.exports = async (mode, serverId) => {
 
         if (data.error) result.error = data.error;
 
-        if ((mode === "ookla" && data.type === "result") || mode === "libre") result = data;
+        if ((mode === "ookla" && data.type === "result") || mode === "libre" || mode === "librecustom") result = data;
     });
 
     await new Promise((resolve, reject) => {

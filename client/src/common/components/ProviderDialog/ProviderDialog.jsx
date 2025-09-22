@@ -6,6 +6,7 @@ import "./styles.sass";
 import React, {useContext, useEffect, useState} from "react";
 import OoklaImage from "./assets/img/ookla.webp";
 import LibreImage from "./assets/img/libre.webp";
+import LibreCustomImage from "./assets/img/librecustom.webp";
 import CloudflareImage from "./assets/img/cloudflare.webp";
 import {jsonRequest, patchRequest} from "@/common/utils/RequestUtil";
 import {Trans} from "react-i18next";
@@ -15,6 +16,7 @@ import {ToastNotificationContext} from "@/common/contexts/ToastNotification";
 export const providers = [
     {id: "ookla", name: "Ookla", image: OoklaImage},
     {id: "libre", name: "LibreSpeed", image: LibreImage},
+    {id: "librecustom", name: "LibreSpeed Custom", image: LibreCustomImage},
     {id: "cloudflare", name: "Cloudflare", image: CloudflareImage}
 ]
 
@@ -32,6 +34,7 @@ export const Dialog = () => {
     const [currentInterface, setCurrentInterface] = useState(config.interface || "none");
     const [ooklaServers, setOoklaServers] = useState({});
     const [libreServers, setLibreServers] = useState({});
+    const [libreCustomServers, setLibreCustomServers] = useState({});
 
     const [serverId, setServerId] = useState("none");
 
@@ -41,6 +44,9 @@ export const Dialog = () => {
         });
         jsonRequest("/info/server/libre").then((response) => {
             setLibreServers(response);
+        });
+        jsonRequest("/info/server/librecustom").then((response) => {
+            setLibreCustomServers(response);
         });
         jsonRequest("/info/interfaces").then((response) => {
             setInterfaces(response);
@@ -115,6 +121,9 @@ export const Dialog = () => {
                                 ))}
                                 {provider === "libre" && Object.keys(libreServers).map((current, index) => (
                                     <option key={index} value={current}>{libreServers[current]}</option>
+                                ))}
+                                {provider === "librecustom" && Object.keys(libreCustomServers).map((current, index) => (
+                                    <option key={index} value={current}>{libreCustomServers[current]}</option>
                                 ))}
                             </select>
                         </div>

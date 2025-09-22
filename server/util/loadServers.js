@@ -43,3 +43,33 @@ if (!fs.existsSync("data/servers/librespeed.json")) {
         console.error("Could not get servers");
     }
 }
+
+// Create custom librespeed servers file
+if (!fs.existsSync("data/servers/librespeed_custom.json")) {
+    let customServers = [
+          {
+            "id": 1,
+            "name": "PHP Backend",
+            "server": "https://example.com/",
+            "dlURL": "garbage.php",
+            "ulURL": "empty.php",
+            "pingURL": "empty.php",
+            "getIpURL": "getIP.php"
+        },
+        {
+            "id": 2,
+            "name": "Go Backend",
+            "server": "http://example.com/speedtest/",
+            "dlURL": "garbage",
+            "ulURL": "empty",
+            "pingURL": "empty",
+            "getIpURL": "getIP"
+        },
+    ];
+    try {
+        fs.writeFileSync("data/servers/librespeed_custom.json", JSON.stringify(customServers, null, 4));
+        console.log("Created librespeed_custom.json with example servers");
+    } catch (e) {
+        console.error("Could not create custom servers file");
+    }
+}
