@@ -30,4 +30,4 @@ jobs:
         with:
           push: true
           platforms: linux/amd64,linux/arm64,linux/arm/v7
-          tags: germannewsmaker/myspeed:development
+          tags: dieerkenntnis/myspeed:development
